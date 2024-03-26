@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.27)
 project(liblogger LANGUAGES C VERSION 0.0.0)
 
 set(CMAKE_C_COMPILER gcc)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -DLOGGER")
 
 set(SOURCE_DIRS
     ${CMAKE_SOURCE_DIR}/src
@@ -14,6 +14,7 @@ foreach(SOURCE_DIR ${SOURCE_DIRS})
     list(APPEND SOURCE_LIST ${RECURSE_SOURCES})
 endforeach()
 
+include(cppcheck.cmake)
 include(uncrustify.cmake)
 
 include_directories(include)
