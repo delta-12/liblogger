@@ -48,7 +48,7 @@ static const char *Logger_PrefixFormat = "%s[%.6lf] %s: ";
 static const char *Logger_PostfixFormat = "%s\n";
 
 static Logger_Mode_t Logger_Mode = LOGGER_MODE_PRINT;
-static Logger_Level_t LOGGER_LEVEL = LOGGER_LEVEL_VERBOSE;
+static Logger_Level_t Logger_Level = LOGGER_LEVEL_VERBOSE;
 
 static void (*Logger_CustomLog)(const char *const buffer, const size_t size) = NULL; /* Client-specified logging function, not be called directly */
 static char *Logger_CustomLogBuffer = NULL;
@@ -70,7 +70,7 @@ static inline void Logger_Custom(const char *const tag, const Logger_Level_t lev
 void Logger_SetLogLevel(const Logger_Level_t level)
 {
 #ifdef LOGGER
-  LOGGER_LEVEL = level;
+  Logger_Level = level;
 #else
   LOGGER_UNUSED(level);
 #endif
@@ -84,8 +84,7 @@ void Logger_RegisterCustomLogger(void (*log)(const char *const buffer, const siz
     Logger_CustomLog = log;
     Logger_CustomLogBuffer = buffer;
     Logger_CustomLogBufferSize = size;
-
-    Logger_SetLogLevel(LOGGER_MODE_CUSTOM);
+    Logger_Mode = LOGGER_MODE_CUSTOM;
   }
 #else
   LOGGER_UNUSED(log);
@@ -97,7 +96,7 @@ void Logger_RegisterCustomLogger(void (*log)(const char *const buffer, const siz
 void Logger_Log(const char *const tag, const Logger_Level_t level, char *const format, ...)
 {
 #ifdef LOGGER
-  if (tag != NULL && format != NULL && level <= LOGGER_LEVEL)
+  if (tag != NULL && format != NULL && level <= Logger_Level)
   {
     va_list args;
 
