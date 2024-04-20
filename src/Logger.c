@@ -1,7 +1,7 @@
 /**
  * @file Logger.c
  *
- * @brief ANSI C logger.
+ * @brief Minimal ANSI C logger.
  *
  ******************************************************************************/
 
@@ -60,8 +60,8 @@ static size_t Logger_CustomLogBufferSize = 0UL;
 
 #ifdef LOGGER
 static inline double Logger_GetTime(void);
-static inline void Logger_Print(const char *const tag, const Logger_Level_t level, char *const format, va_list args);
-static inline void Logger_Custom(const char *const tag, const Logger_Level_t level, char *const format, va_list args);
+static inline void Logger_Print(const char *const tag, const Logger_Level_t level, const char *const format, va_list args);
+static inline void Logger_Custom(const char *const tag, const Logger_Level_t level, const char *const format, va_list args);
 #endif
 
 /* Function Definitions
@@ -130,14 +130,14 @@ static inline double Logger_GetTime(void)
   return (double)(clock()) / (double)CLOCKS_PER_SEC;
 }
 
-static inline void Logger_Print(const char *const tag, const Logger_Level_t level, char *const format, va_list args)
+static inline void Logger_Print(const char *const tag, const Logger_Level_t level, const char *const format, va_list args)
 {
   printf(Logger_PrefixFormat, Logger_AnsiColorLut[level], Logger_GetTime(), tag);
   vprintf(format, args);
   printf(Logger_PostfixFormat, LOGGER_ANSI_RESET);
 }
 
-static inline void Logger_Custom(const char *const tag, const Logger_Level_t level, char *const format, va_list args)
+static inline void Logger_Custom(const char *const tag, const Logger_Level_t level, const char *const format, va_list args)
 {
   int64_t size;
 

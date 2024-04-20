@@ -21,3 +21,9 @@ include_directories(include)
 set(SRCS src/Logger.c)
 add_library(logger ${SRCS})
 add_dependencies(logger uncrustify)
+
+add_executable(test_Logger ${CMAKE_SOURCE_DIR}/test/test_Logger.c)
+target_link_libraries(test_Logger logger)
+
+enable_testing()
+add_test(test_Logger test_Logger)

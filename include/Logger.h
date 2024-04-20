@@ -1,7 +1,7 @@
 /**
  * @file Logger.h
  *
- * @brief ANSI C logger.
+ * @brief Minimal ANSI C logger.
  *
  ******************************************************************************/
 
