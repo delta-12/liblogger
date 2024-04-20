@@ -6,4 +6,14 @@
     <suppress>
         <id>missingIncludeSystem</id>
     </suppress>
+    <suppress>
+        <id>unusedFunction</id>
+        <fileName>*/liblogger/src/Logger.c</fileName>
+        <symbolName>Logger_RegisterCustomLogger</symbolName>
+    </suppress>
+    <suppress>
+        <id>unusedFunction</id>
+        <fileName>*/liblogger/src/Logger.c</fileName>
+        <symbolName>Logger_Log</symbolName>
+    </suppress>
 </suppressions>
